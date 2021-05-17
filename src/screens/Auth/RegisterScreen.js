@@ -32,7 +32,7 @@ const RegisterScreen = ({ navigation }) => {
           style={[
             tailwind("bg-gray-900 justify-center items-center"),
             {
-              height: wHeight * 0.3,
+              height: wHeight * 0.25,
             },
           ]}
         >
@@ -43,7 +43,9 @@ const RegisterScreen = ({ navigation }) => {
           </Text>
         </View>
         <ScrollView
-          style={tailwind("bg-gray-100 pb-10 overflow-hidden rounded-tl-default")}
+          style={tailwind(
+            "bg-gray-100 flex-1 pb-10 overflow-hidden rounded-tl-default"
+          )}
         >
           <View style={[tailwind("justify-between")]}>
             <View style={tailwind("p-5")}>
@@ -68,7 +70,7 @@ const RegisterScreen = ({ navigation }) => {
                   placeholder="* * * * * * * * *"
                 />
                 <Button
-                  label="Sign in"
+                  label="Sign up"
                   color={"text-white"}
                   background={"bg-gray-900"}
                   hover={"bg-gray-800"}
@@ -77,17 +79,17 @@ const RegisterScreen = ({ navigation }) => {
               </View>
             </View>
             <Pressable
-              onPress={() => navigation.navigate("Register")}
+              onPress={() => navigation.navigate("Login")}
               style={tailwind(
                 "items-center justify-center flex-row items-center pb-10"
               )}
             >
               <Text style={tailwind("font-sfp-semibold")}>
-                Don't have an account?{" "}
+                Already have an account?{" "}
               </Text>
 
               <Text style={tailwind("font-sfp-bold ml-2 text-blue-700")}>
-                Sign up
+                Login here
               </Text>
             </Pressable>
           </View>

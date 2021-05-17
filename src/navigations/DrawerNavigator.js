@@ -1,14 +1,18 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeNavigator from "./HomeNavigator";
+import Drawer from "./Drawer";
 
-const Drawer = createDrawerNavigator();
+const HomeDrawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator screenOptions={{ headerShown: false }}>
-      <Drawer.Screen name="Home" component={HomeNavigator} />
-    </Drawer.Navigator>
+    <HomeDrawer.Navigator
+      drawerContent={Drawer}
+      screenOptions={{ headerShown: false, drawerType: "slide" }}
+    >
+      <HomeDrawer.Screen name="Home" component={HomeNavigator} />
+    </HomeDrawer.Navigator>
   );
 };
 

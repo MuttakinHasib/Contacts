@@ -2,12 +2,13 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./DrawerNavigator";
 import AuthNavigator from "./AuthNavigator";
+import { useSelector } from "react-redux";
 
 const AppNavContainer = () => {
-  const isLoggedIn = false;
+  const { user } = useSelector(state => state.userLogin);
   return (
     <NavigationContainer>
-      {isLoggedIn ? <DrawerNavigator /> : <AuthNavigator />}
+      {user ? <DrawerNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };

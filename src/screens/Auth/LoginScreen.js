@@ -1,23 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import React from "react";
-import {
-  View,
-  Text,
-  Dimensions,
-  KeyboardAvoidingView,
-  ScrollView,
-  TouchableOpacity,
-  Pressable,
-  Platform,
-} from "react-native";
+import { View, Text, Dimensions, Pressable, Platform } from "react-native";
 import { tailwind } from "../../../lib/tailwind";
-import { Container, AppInput, Button } from "../../components";
+import { AppInput, Button } from "../../components";
 import { statusbarHeight } from "../../utils/statusbar";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/actions/authActions";
 
 const { height: wHeight } = Dimensions.get("window");
 
 const LoginScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   return (
     <KeyboardAwareScrollView>
       <View
@@ -70,6 +64,7 @@ const LoginScreen = ({ navigation }) => {
                 background={"bg-gray-900"}
                 hover={"bg-gray-800"}
                 style={tailwind("mt-5")}
+                onPress={() => dispatch(login())}
               />
             </View>
           </View>
