@@ -1,31 +1,88 @@
+import { DrawerContentScrollView } from "@react-navigation/drawer";
 import React from "react";
-import { View, Text } from "react-native";
-import { tailwind } from "../../../lib/tailwind";
+import { View, Text, Dimensions, Image } from "react-native";
+import { useDispatch } from "react-redux";
+import { getColor, tailwind } from "../../../lib/tailwind";
+import { RoundedIcon } from "../../components";
+import { logout } from "../../redux/actions/authActions";
+import DrawerItem from "./DrawerItem";
+
+const { height: wHeight } = Dimensions.get("window");
 
 const items = [
   {
-    icon: "settings",
-    name: "Settings",
-    screen: "Settings",
-  },
-  {
     icon: "user",
-    name: "Profile",
+    label: "Profile",
     screen: "Profile",
   },
   {
-    icon: "user",
-    name: "Logout",
-    screen: "",
+    icon: "contacts",
+    label: "Contacts",
+    screen: "Contacts",
+  },
+  {
+    icon: "settings",
+    label: "Settings",
+    screen: "Settings",
   },
 ];
 
-const Drawer = () => {
+const DrawerContent = props => {
+  const dispatch = useDispatch();
   return (
     <View style={tailwind("bg-gray-900 flex-1")}>
-      <Text></Text>
+      <View style={tailwind("bg-gray-100")}>
+        <View
+          style={[
+            tailwind(
+              "justify-center px-5 pt-10 pb-5 bg-gray-900 rounded-br-default"
+            ),
+            {
+              height: wHeight * 0.15,
+            },
+          ]}
+        >
+          <View style={tailwind("flex-row items-center")}>
+            <Image
+              source={{
+                uri: "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png",
+              }}
+              style={{ height: 50, width: 50 }}
+            />
+            <View style={tailwind("ml-5")}>
+              <Text style={tailwind("font-sfp-semibold text-lg text-gray-100")}>
+                Hasib Molla
+              </Text>
+              <Text style={tailwind("font-sfp-regular text-gray-600")}>
+                +880 1315873250
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        style={tailwind(
+          "bg-gray-100 flex-1 justify-between p-5 overflow-hidden rounded-tl-default"
+        )}
+      >
+        <DrawerContentScrollView>
+          {items.map(item => (
+            <DrawerItem
+              key={item.screen}
+              {...item}
+              navigation={props.navigation}
+            />
+          ))}
+        </DrawerContentScrollView>
+        <DrawerItem
+          icon="power"
+          label="Logout"
+          color={getColor("red-500")}
+          onPress={() => dispatch(logout())}
+        />
+      </View>
     </View>
   );
 };
 
-export default Drawer;
+export default DrawerContent;

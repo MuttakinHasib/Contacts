@@ -1,5 +1,5 @@
 import React from "react";
-import { Feather as Icon } from "@expo/vector-icons";
+import { Feather as Icon, AntDesign } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 import { tailwind } from "../../lib/tailwind";
 
@@ -15,7 +15,11 @@ const RoundedIcon = ({ iconName, size, color, backgroundColor, iconRatio }) => {
       ]}
     >
       <Text>
-        <Icon name={iconName} size={iconSize} {...{ color }} />
+        {iconName === "contacts" ? (
+          <AntDesign name="contacts" size={iconSize} {...{ color }} />
+        ) : (
+          <Icon name={iconName} size={iconSize} {...{ color }} />
+        )}
       </Text>
     </View>
   );

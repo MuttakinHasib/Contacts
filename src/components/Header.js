@@ -1,11 +1,23 @@
-// import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { View, Text, Platform, TouchableOpacity } from "react-native";
-import { getColor, tailwind } from "../../lib/tailwind";
+import { useIsDrawerOpen } from "@react-navigation/drawer";
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { tailwind } from "../../lib/tailwind";
 import { statusbarHeight } from "../utils/statusbar";
 import RoundedIcon from "./RoundedIcon";
 
 const Header = ({ label, icon }) => {
+  const [barStyle, setBarStyle] = useState("auto");
+
+  const isDrawerOpen = useIsDrawerOpen();
+
+  useEffect(() => {
+    if (isDrawerOpen) {
+      setBarStyle("light");
+    } else {
+      setBarStyle("dark");
+    }
+  }, [isDrawerOpen]);
   const SIZE = 58.17 + statusbarHeight;
   return (
     <View
@@ -14,6 +26,7 @@ const Header = ({ label, icon }) => {
         { paddingTop: statusbarHeight, height: SIZE },
       ]}
     >
+      <StatusBar style={barStyle} />
       <TouchableOpacity onPress={icon.onPress}>
         <RoundedIcon
           iconName={icon.name}
