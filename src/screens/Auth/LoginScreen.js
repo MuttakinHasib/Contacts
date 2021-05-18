@@ -1,7 +1,14 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import React from "react";
-import { View, Text, Dimensions, Pressable, Platform } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
+
 import { tailwind } from "../../../lib/tailwind";
 import { AppInput, Button } from "../../components";
 import { statusbarHeight } from "../../utils/statusbar";
@@ -12,6 +19,7 @@ const { height: wHeight } = Dimensions.get("window");
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+
   return (
     <KeyboardAwareScrollView>
       <View
@@ -41,7 +49,7 @@ const LoginScreen = ({ navigation }) => {
         <View
           style={[
             tailwind(
-              "bg-gray-100 flex-1 justify-between pb-10 overflow-hidden rounded-tl-default"
+              "bg-gray-100 flex-1 justify-between overflow-hidden rounded-tl-default"
             ),
           ]}
         >
@@ -68,10 +76,10 @@ const LoginScreen = ({ navigation }) => {
               />
             </View>
           </View>
-          <Pressable
+          <TouchableOpacity
             onPress={() => navigation.navigate("Register")}
             style={tailwind(
-              "items-center justify-center flex-row items-center"
+              "items-center justify-center flex-row py-10 items-center"
             )}
           >
             <Text style={tailwind("font-sfp-semibold")}>
@@ -81,7 +89,7 @@ const LoginScreen = ({ navigation }) => {
             <Text style={tailwind("font-sfp-bold ml-2 text-blue-700")}>
               Sign up
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAwareScrollView>

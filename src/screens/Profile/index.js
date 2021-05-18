@@ -1,12 +1,23 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { View, Text } from "react-native";
+import { getColor } from "../../../lib/tailwind";
+import { Header } from "../../components";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   return (
     <View>
-      <Text></Text>
+      <Header
+        label="Profile"
+        icon={{
+          name: "menu",
+          backgroundColor: getColor("gray-50"),
+          onPress: () => {
+            navigation.openDrawer();
+          },
+        }}
+      />
     </View>
-  )
-}
+  );
+};
 
-export default ProfileScreen
+export default ProfileScreen;

@@ -22,7 +22,7 @@ const Header = ({ label, icon }) => {
   return (
     <View
       style={[
-        tailwind("bg-white flex-row justify-between items-center px-5"),
+        tailwind("bg-white flex-row justify-between items-center px-5 border-b border-gray-100"),
         { paddingTop: statusbarHeight, height: SIZE },
       ]}
     >

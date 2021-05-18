@@ -1,6 +1,5 @@
-import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { getColor, tailwind } from "../../../lib/tailwind";
 import { RoundedIcon } from "../../components";
 
@@ -8,6 +7,7 @@ const DrawerItem = ({ icon, color, label, screen, onPress, navigation }) => {
   const navigationHandler = () => {
     navigation.navigate(screen);
   };
+
   return (
     <TouchableOpacity
       style={tailwind("flex-row items-center my-2")}

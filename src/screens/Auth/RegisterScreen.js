@@ -1,14 +1,15 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import React from "react";
 import {
   View,
   Text,
   Dimensions,
-  Pressable,
   ScrollView,
   Platform,
+  TouchableOpacity,
 } from "react-native";
+
 import { tailwind } from "../../../lib/tailwind";
 import { Container, AppInput, Button } from "../../components";
 import { statusbarHeight } from "../../utils/statusbar";
@@ -78,10 +79,10 @@ const RegisterScreen = ({ navigation }) => {
                 />
               </View>
             </View>
-            <Pressable
+            <TouchableOpacity
               onPress={() => navigation.navigate("Login")}
               style={tailwind(
-                "items-center justify-center flex-row items-center pb-10"
+                "items-center justify-center flex-row items-center pt-3 pb-10"
               )}
             >
               <Text style={tailwind("font-sfp-semibold")}>
@@ -91,7 +92,7 @@ const RegisterScreen = ({ navigation }) => {
               <Text style={tailwind("font-sfp-bold ml-2 text-blue-700")}>
                 Login here
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>

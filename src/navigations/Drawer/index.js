@@ -1,6 +1,7 @@
 import { DrawerContentScrollView } from "@react-navigation/drawer";
+import { Avatar } from "@ui-kitten/components";
 import React from "react";
-import { View, Text, Dimensions, Image } from "react-native";
+import { View, Text, Dimensions, Image, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import { getColor, tailwind } from "../../../lib/tailwind";
 import { RoundedIcon } from "../../components";
@@ -42,12 +43,15 @@ const DrawerContent = props => {
             },
           ]}
         >
-          <View style={tailwind("flex-row items-center")}>
-            <Image
+          <TouchableOpacity
+            style={tailwind("flex-row items-center")}
+            onPress={() => props.navigation.navigate("Profile")}
+          >
+            <Avatar
               source={{
                 uri: "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png",
               }}
-              style={{ height: 50, width: 50 }}
+              size="giant"
             />
             <View style={tailwind("ml-5")}>
               <Text style={tailwind("font-sfp-semibold text-lg text-gray-100")}>
@@ -57,15 +61,15 @@ const DrawerContent = props => {
                 +880 1315873250
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
       <View
         style={tailwind(
-          "bg-gray-100 flex-1 justify-between p-5 overflow-hidden rounded-tl-default"
+          "bg-gray-100 flex-1 justify-between overflow-hidden rounded-tl-default"
         )}
       >
-        <DrawerContentScrollView>
+        <DrawerContentScrollView style={tailwind("p-5")}>
           {items.map(item => (
             <DrawerItem
               key={item.screen}
@@ -74,12 +78,14 @@ const DrawerContent = props => {
             />
           ))}
         </DrawerContentScrollView>
-        <DrawerItem
-          icon="power"
-          label="Logout"
-          color={getColor("red-500")}
-          onPress={() => dispatch(logout())}
-        />
+        <View style={tailwind("p-5")}>
+          <DrawerItem
+            icon="power"
+            label="Logout"
+            color={getColor("red-500")}
+            onPress={() => dispatch(logout())}
+          />
+        </View>
       </View>
     </View>
   );
