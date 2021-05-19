@@ -1,10 +1,9 @@
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Avatar } from "@ui-kitten/components";
 import React from "react";
-import { View, Text, Dimensions, Image, TouchableOpacity } from "react-native";
+import { View, Text, Dimensions, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import { getColor, tailwind } from "../../../lib/tailwind";
-import { RoundedIcon } from "../../components";
 import { logout } from "../../redux/actions/authActions";
 import DrawerItem from "./DrawerItem";
 
