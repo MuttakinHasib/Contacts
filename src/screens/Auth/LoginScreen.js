@@ -7,6 +7,7 @@ import {
   Dimensions,
   Platform,
   TouchableOpacity,
+  Image,
 } from "react-native";
 
 import { tailwind } from "../../../lib/tailwind";
@@ -40,8 +41,12 @@ const LoginScreen = ({ navigation }) => {
             },
           ]}
         >
+          <Image
+            source={require("../../assets/icon.png")}
+            style={tailwind("w-20 h-20")}
+          />
           <Text
-            style={[tailwind("text-3xl text-white uppercase font-sfp-bold")]}
+            style={[tailwind("text-2xl text-white uppercase font-sfp-bold")]}
           >
             Contact
           </Text>
@@ -57,7 +62,7 @@ const LoginScreen = ({ navigation }) => {
             <Text
               style={[tailwind("text-center text-2xl font-sfp-semibold my-6")]}
             >
-              Login
+              Welcome back!
             </Text>
             <View>
               <AppInput

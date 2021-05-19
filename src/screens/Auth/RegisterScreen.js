@@ -8,6 +8,7 @@ import {
   ScrollView,
   Platform,
   TouchableOpacity,
+  Image,
 } from "react-native";
 
 import { tailwind } from "../../../lib/tailwind";
@@ -37,8 +38,12 @@ const RegisterScreen = ({ navigation }) => {
             },
           ]}
         >
+          <Image
+            source={require("../../assets/icon.png")}
+            style={tailwind("w-20 h-20")}
+          />
           <Text
-            style={[tailwind("text-3xl text-white uppercase font-sfp-bold")]}
+            style={[tailwind("text-2xl text-white uppercase font-sfp-bold")]}
           >
             Contact
           </Text>
@@ -55,7 +60,7 @@ const RegisterScreen = ({ navigation }) => {
                   tailwind("text-center text-2xl font-sfp-semibold my-6"),
                 ]}
               >
-                Register
+                Create new account
               </Text>
               <View>
                 <AppInput label="Name" placeholder="Hasib Molla" />
