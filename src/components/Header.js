@@ -25,7 +25,11 @@ const Header = ({ label, left, right }) => {
     <View
       style={[
         tailwind("bg-white flex-row justify-between items-center px-5"),
-        { paddingTop: statusbarHeight || insets.top, height: SIZE },
+        {
+          paddingTop: statusbarHeight,
+          paddingVertical: insets.top,
+          height: SIZE,
+        },
       ]}
     >
       <StatusBar style={barStyle} />
