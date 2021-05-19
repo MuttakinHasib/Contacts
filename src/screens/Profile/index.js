@@ -8,7 +8,7 @@ const ProfileScreen = ({ navigation }) => {
     <View>
       <Header
         label="Profile"
-        icon={{
+        left={{
           name: "menu",
           backgroundColor: getColor("gray-50"),
           onPress: () => {

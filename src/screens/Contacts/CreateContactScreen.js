@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import * as ImagePicker from "expo-image-picker";
 
 import { getColor, tailwind } from "../../../lib/tailwind";
-import { AppInput, Button, Header } from "../../components";
+import { AddToFavorites, AppInput, Button, Header } from "../../components";
 
 const { height } = Dimensions.get("screen");
 
@@ -13,7 +13,7 @@ const CreateContactScreen = ({ navigation }) => {
   const [avatar, setAvatar] = useState(
     "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png"
   );
-
+  const [favorite, setFavorite] = useState(false);
   const handlePickerAvatar = async () => {
     await ImagePicker.getCameraPermissionsAsync();
 
@@ -62,6 +62,11 @@ const CreateContactScreen = ({ navigation }) => {
               type="number"
               label="Phone Number"
               placeholder="1XXX - XXXXX"
+            />
+            <AddToFavorites
+              checked={favorite}
+              onChange={isChecked => setFavorite(isChecked)}
+              onPress={() => setFavorite(prev => !prev)}
             />
             <Button
               label="Add to contacts"
