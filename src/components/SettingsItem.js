@@ -12,11 +12,15 @@ const SettingsItem = ({ item }) => {
           {item.title}
         </Text>
       )}
-      description={() => (
-        <Text style={tailwind("font-sfp-regular text-gray-600")}>
-          {item.subTitle}
-        </Text>
-      )}
+      description={
+        item.subTitle
+          ? () => (
+              <Text style={tailwind("font-sfp-regular text-gray-600")}>
+                {item.subTitle}
+              </Text>
+            )
+          : null
+      }
       accessoryRight={() => (
         <Icon
           style={tailwind("w-6 h-6")}

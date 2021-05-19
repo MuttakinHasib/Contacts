@@ -8,3 +8,4 @@ export { default as AddToFavorites } from "./AddToFavorites";
 
 export { default as Header } from "./Header";
 export { default as ContactItem } from "./ContactItem";
+export { default as SettingsItem } from "./SettingsItem";

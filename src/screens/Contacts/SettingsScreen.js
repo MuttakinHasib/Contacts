@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
-import { getColor } from "../../../lib/tailwind";
-import { Header } from "../../components";
+import { getColor, tailwind } from "../../../lib/tailwind";
+import { Header, SettingsItem } from "../../components";
 
 const settingsOptions = [
   {
@@ -53,7 +53,7 @@ const settingsOptions = [
     onPress: () => {},
   },
   {
-    id: 8,
+    id: 9,
     title: "About Contacts",
     subTitle: null,
     onPress: () => {},
@@ -76,8 +76,8 @@ const SettingsScreen = ({ navigation }) => {
       <View style={tailwind("flex-1")}>
         <FlatList
           data={settingsOptions}
-          keyExtractor={item => item.id}
-          renderItem={ContactItem}
+          keyExtractor={item => (`settings - ${item.id}`)}
+          renderItem={SettingsItem}
         />
       </View>
     </View>
