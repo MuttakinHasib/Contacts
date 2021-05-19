@@ -64,7 +64,7 @@ const SettingsScreen = ({ navigation }) => {
   return (
     <View style={tailwind("flex-1")}>
       <Header
-        label="All Contacts"
+        label="Settings"
         left={{
           name: "menu",
           backgroundColor: getColor("gray-50"),
