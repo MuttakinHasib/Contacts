@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import faker from "faker";
 import { View, Text, FlatList } from "react-native";
 import { getColor, tailwind } from "../../../lib/tailwind";
-import { ContactItem, Container, Header } from "../../components";
+import { AddButton, Header } from "../../components";
 import { useNavigation } from "@react-navigation/core";
-import { Avatar, Divider, Icon, List, ListItem } from "@ui-kitten/components";
+import { Avatar, Icon, ListItem } from "@ui-kitten/components";
 
-const contacts = [
-  {
-    name: "Hasib",
-    phone: "01315873250",
-    avatar:
-      "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png",
-  },
-  {
-    name: "Kaif",
-    phone: "01347694737",
-    avatar:
-      "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png",
-  },
-];
+const contacts = [...Array(30).keys()].map((_, i) => ({
+  id: faker.datatype.uuid(),
+  name: faker.name.firstName(),
+  phone: faker.phone.phoneNumber(),
+  avatar: faker.image.avatar(),
+}));
 
 const ContactsScreen = () => {
   const navigation = useNavigation();
 
   const renderItem = ({ item }) => (
     <ListItem
-      style={tailwind("px-6")}
+      style={tailwind("px-6 border-t border-gray-100")}
       title={() => (
         <Text style={tailwind("font-sfp-semibold text-base")}>{item.name}</Text>
       )}
@@ -52,7 +45,7 @@ const ContactsScreen = () => {
   );
 
   return (
-    <View>
+    <View style={tailwind("flex-1")}>
       <Header
         label="Contacts"
         icon={{
@@ -63,12 +56,16 @@ const ContactsScreen = () => {
           },
         }}
       />
-      {/* <FlatList data={contacts} /> */}
-      <List
-        data={contacts}
-        ItemSeparatorComponent={Divider}
-        {...{ renderItem }}
-      />
+      <View style={tailwind("flex-1")}>
+        <AddButton onPress={() => navigation.navigate("Create Contact")} />
+        {/* <FlatList data={contacts} /> */}
+        <FlatList
+          data={contacts}
+          keyExtractor={item => item.id}
+          // ItemSeparatorComponent={Divider}
+          {...{ renderItem }}
+        />
+      </View>
     </View>
   );
 };
