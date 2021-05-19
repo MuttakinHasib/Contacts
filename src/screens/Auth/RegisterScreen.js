@@ -45,7 +45,7 @@ const RegisterScreen = ({ navigation }) => {
           <Text
             style={[tailwind("text-2xl text-white uppercase font-sfp-bold")]}
           >
-            Contact
+            Contacts
           </Text>
         </View>
         <ScrollView

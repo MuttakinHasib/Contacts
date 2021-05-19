@@ -1,26 +1,21 @@
-import { Avatar, Icon, ListItem } from "@ui-kitten/components";
 import React from "react";
-import { View, Text } from "react-native";
+import { Icon, ListItem } from "@ui-kitten/components";
+import { Text } from "react-native";
 import { getColor, tailwind } from "../../lib/tailwind";
 
-const ContactItem = ({ item }) => {
+const SettingsItem = ({ item }) => {
   return (
     <ListItem
       style={tailwind("px-6 border-t border-gray-100")}
       title={() => (
-        <Text style={tailwind("font-sfp-semibold text-base")}>{item.name}</Text>
+        <Text style={tailwind("font-sfp-semibold text-base")}>
+          {item.title}
+        </Text>
       )}
       description={() => (
         <Text style={tailwind("font-sfp-regular text-gray-600")}>
-          {item.phone}
+          {item.subTitle}
         </Text>
-      )}
-      accessoryLeft={() => (
-        <Avatar
-          style={tailwind("mr-3")}
-          size="large"
-          source={{ uri: item.avatar }}
-        />
       )}
       accessoryRight={() => (
         <Icon
@@ -33,4 +28,4 @@ const ContactItem = ({ item }) => {
   );
 };
 
-export default ContactItem;
+export default SettingsItem;

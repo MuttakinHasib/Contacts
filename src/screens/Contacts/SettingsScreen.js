@@ -1,14 +1,71 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { getColor } from "../../../lib/tailwind";
 import { Header } from "../../components";
 
+const settingsOptions = [
+  {
+    id: 1,
+    title: "My Info",
+    subTitle: "Setup your profile",
+    onPress: () => {},
+  },
+  {
+    id: 2,
+    title: "Accounts",
+    subTitle: null,
+    onPress: () => {},
+  },
+  {
+    id: 3,
+    title: "Default account for new contacts",
+    subTitle: "hasibmolla28@gmail.com",
+    onPress: () => {},
+  },
+  {
+    id: 4,
+    title: "Contacts to display",
+    subTitle: "All contacts",
+    onPress: () => {},
+  },
+  {
+    id: 5,
+    title: "Sort by",
+    subTitle: "Ascending",
+    onPress: () => {},
+  },
+  {
+    id: 6,
+    title: "Import",
+    subTitle: null,
+    onPress: () => {},
+  },
+  {
+    id: 7,
+    title: "Export",
+    subTitle: null,
+    onPress: () => {},
+  },
+  {
+    id: 8,
+    title: "Blocked numbers",
+    subTitle: null,
+    onPress: () => {},
+  },
+  {
+    id: 8,
+    title: "About Contacts",
+    subTitle: null,
+    onPress: () => {},
+  },
+];
+
 const SettingsScreen = ({ navigation }) => {
   return (
-    <View>
+    <View style={tailwind("flex-1")}>
       <Header
-        label="Settings"
-        icon={{
+        label="All Contacts"
+        left={{
           name: "menu",
           backgroundColor: getColor("gray-50"),
           onPress: () => {
@@ -16,7 +73,13 @@ const SettingsScreen = ({ navigation }) => {
           },
         }}
       />
-      <Text></Text>
+      <View style={tailwind("flex-1")}>
+        <FlatList
+          data={settingsOptions}
+          keyExtractor={item => item.id}
+          renderItem={ContactItem}
+        />
+      </View>
     </View>
   );
 };
