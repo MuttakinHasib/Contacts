@@ -48,12 +48,17 @@ const ContactsScreen = () => {
     <View style={tailwind("flex-1")}>
       <Header
         label="Contacts"
-        icon={{
+        left={{
           name: "menu",
           backgroundColor: getColor("gray-50"),
           onPress: () => {
             navigation.openDrawer();
           },
+        }}
+        right={{
+          name: "search",
+          backgroundColor: getColor("gray-50"),
+          onPress: () => {},
         }}
       />
       <View style={tailwind("flex-1")}>

@@ -59,7 +59,11 @@ const RegisterScreen = ({ navigation }) => {
               </Text>
               <View>
                 <AppInput label="Name" placeholder="Hasib Molla" />
-                <AppInput label="Email" placeholder="example@email.com" />
+                <AppInput
+                  type="email"
+                  label="Email"
+                  placeholder="example@email.com"
+                />
                 <AppInput
                   type="password"
                   label="Password"

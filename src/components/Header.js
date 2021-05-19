@@ -6,7 +6,7 @@ import { tailwind } from "../../lib/tailwind";
 import { statusbarHeight } from "../utils/statusbar";
 import RoundedIcon from "./RoundedIcon";
 
-const Header = ({ label, icon }) => {
+const Header = ({ label, left, right }) => {
   const [barStyle, setBarStyle] = useState("auto");
 
   const isDrawerOpen = useIsDrawerOpen();
@@ -27,16 +27,27 @@ const Header = ({ label, icon }) => {
       ]}
     >
       <StatusBar style={barStyle} />
-      <TouchableOpacity onPress={icon.onPress}>
+      <TouchableOpacity onPress={left.onPress}>
         <RoundedIcon
-          iconName={icon.name}
+          iconName={left.name}
           size={38}
-          color={icon.color}
-          backgroundColor={icon.backgroundColor}
+          color={left.color}
+          backgroundColor={left.backgroundColor}
         />
       </TouchableOpacity>
       <Text style={tailwind("font-sfp-semibold text-lg")}>{label}</Text>
-      <View style={{ width: 38 }} />
+      {right ? (
+        <TouchableOpacity onPress={right.onPress}>
+          <RoundedIcon
+            iconName={right.name}
+            size={38}
+            color={right.color}
+            backgroundColor={right.backgroundColor}
+          />
+        </TouchableOpacity>
+      ) : (
+        <View style={{ width: 38 }} />
+      )}
     </View>
   );
 };

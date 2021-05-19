@@ -60,7 +60,11 @@ const LoginScreen = ({ navigation }) => {
               Login
             </Text>
             <View>
-              <AppInput label="Email" placeholder="example@email.com" />
+              <AppInput
+                type="email"
+                label="Email"
+                placeholder="example@email.com"
+              />
               <AppInput
                 type="password"
                 label="Password"
