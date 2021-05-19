@@ -28,7 +28,7 @@ const Header = ({ label, left, right }) => {
       style={[
         tailwind("bg-white flex-row justify-between items-center px-5"),
         {
-          paddingTop: statusbarHeight,
+          paddingTop: statusbarHeight || insets.top,
           // paddingVertical: insets.top,
           height: SIZE,
         },
