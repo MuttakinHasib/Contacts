@@ -21,14 +21,14 @@ const Header = ({ label, left, right }) => {
     }
   }, [isDrawerOpen]);
   // const SIZE = 58.17 + statusbarHeight || insets.top;
-  const SIZE = statusbarHeight * 3 || insets.top * 3;
+  const SIZE = insets.top * 3;
   console.log(statusbarHeight, insets.top);
   return (
     <View
       style={[
         tailwind("bg-white flex-row justify-between items-center px-5"),
         {
-          paddingTop: statusbarHeight || insets.top,
+          paddingTop: insets.top,
           // paddingVertical: insets.top,
           height: SIZE,
         },
