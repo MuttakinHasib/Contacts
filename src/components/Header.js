@@ -20,7 +20,7 @@ const Header = ({ label, left, right }) => {
       setBarStyle("dark");
     }
   }, [isDrawerOpen]);
-  const SIZE = 58.17 + statusbarHeight;
+  const SIZE = 58.17 + statusbarHeight || insets.top;
   return (
     <View
       style={[
