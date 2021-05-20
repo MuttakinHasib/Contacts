@@ -1,11 +1,13 @@
+
 import { Avatar, Icon, ListItem } from "@ui-kitten/components";
 import React from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import { getColor, tailwind } from "../../lib/tailwind";
 
-const ContactItem = ({ item }) => {
+const ContactItem = ({ item, navigation }) => {
   return (
     <ListItem
+      onPress={() => navigation.navigate("Contact Details")}
       style={tailwind("px-6 border-t border-gray-100")}
       title={() => (
         <Text style={tailwind("font-sfp-semibold text-base")}>{item.name}</Text>

@@ -30,13 +30,14 @@ const ContactsScreen = ({ navigation }) => {
           onPress: () => {},
         }}
       />
-      <View style={tailwind("flex-1")}>
+
+      <View style={tailwind("flex-1 p-3")}>
         <AddButton onPress={() => navigation.navigate("Create Contact")} />
 
         <FlatList
           data={contacts}
           keyExtractor={item => item.id}
-          renderItem={ContactItem}
+          renderItem={props => <ContactItem {...props} {...{ navigation }} />}
         />
       </View>
     </View>

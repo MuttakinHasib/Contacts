@@ -77,10 +77,10 @@ const DrawerContent = props => {
             />
           ))}
         </DrawerContentScrollView>
-        <View style={tailwind("p-5")}>
+        <View style={tailwind("px-5 py-2 border-t border-gray-200")}>
           <DrawerItem
-            icon="power"
-            label="Logout"
+            icon="log-out"
+            label="Log Out"
             color={getColor("red-500")}
             onPress={() => dispatch(logout())}
           />
