@@ -37,6 +37,7 @@ const ContactsScreen = ({ navigation }) => {
         <FlatList
           data={contacts}
           keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
           renderItem={props => <ContactItem {...props} {...{ navigation }} />}
         />
       </View>

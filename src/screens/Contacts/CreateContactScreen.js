@@ -1,6 +1,13 @@
-import { Avatar } from "@ui-kitten/components";
 import React, { useState } from "react";
-import { View, Text, Dimensions, TouchableOpacity } from "react-native";
+import { Avatar, Icon } from "@ui-kitten/components";
+import {
+  View,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+  ScrollView,
+  TouchableNativeFeedback,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as ImagePicker from "expo-image-picker";
 
@@ -10,10 +17,13 @@ import { AddToFavorites, AppInput, Button, Header } from "../../components";
 const { height } = Dimensions.get("screen");
 
 const CreateContactScreen = ({ navigation }) => {
+  const [favorite, setFavorite] = useState(false);
+  const [numberField, setNumberField] = useState(1);
+
   const [avatar, setAvatar] = useState(
     "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png"
   );
-  const [favorite, setFavorite] = useState(false);
+
   const handlePickerAvatar = async () => {
     await ImagePicker.getCameraPermissionsAsync();
 
@@ -41,7 +51,10 @@ const CreateContactScreen = ({ navigation }) => {
             },
           }}
         />
-        <View style={tailwind("p-5")}>
+        <ScrollView
+          style={tailwind("p-5")}
+          showsVerticalScrollIndicator={false}
+        >
           <TouchableOpacity onPress={handlePickerAvatar}>
             <Avatar
               style={tailwind("self-center w-28 h-28")}
@@ -50,19 +63,37 @@ const CreateContactScreen = ({ navigation }) => {
               }}
             />
           </TouchableOpacity>
-          <View>
+          <View style={tailwind("pb-10")}>
             <AppInput label="Name" placeholder="Hasib Molla" />
             <AppInput
               type="email"
               label="Email Address"
               placeholder="example@email.com"
             />
-            <AppInput
-              phone
-              type="number"
-              label="Phone Number"
-              placeholder="1XXX - XXXXX"
-            />
+            {[...Array(numberField).keys()].map((_, i) => (
+              <AppInput
+                key={i}
+                phone
+                type="number"
+                label="Phone Number"
+                placeholder="1XXX - XXXXX"
+              />
+            ))}
+            <TouchableOpacity
+              style={tailwind(
+                "bg-white mt-5 px-3 py-5 flex-row justify-between items-center rounded-lg"
+              )}
+              onPress={() => setNumberField(prev => prev + 1)}
+            >
+              <Text style={tailwind("font-sfp-semibold text-base")}>
+                Add another phone
+              </Text>
+              <Icon
+                style={tailwind("w-6 h-6")}
+                fill={getColor("gray-700")}
+                name="plus"
+              />
+            </TouchableOpacity>
             <AddToFavorites
               checked={favorite}
               onChange={isChecked => setFavorite(isChecked)}
@@ -76,7 +107,7 @@ const CreateContactScreen = ({ navigation }) => {
               style={tailwind("mt-5")}
             />
           </View>
-        </View>
+        </ScrollView>
       </View>
     </KeyboardAwareScrollView>
   );

@@ -1,15 +1,10 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/core";
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacityComponent,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { getColor, tailwind } from "../../../lib/tailwind";
-import { Header, RoundedIcon } from "../../components";
+import { Button, Header, RoundedIcon } from "../../components";
 import { Avatar } from "@ui-kitten/components";
+import CountryPicker from "react-native-country-picker-modal";
 
 const ContactDetailsScreen = ({}) => {
   const navigation = useNavigation();
@@ -24,8 +19,20 @@ const ContactDetailsScreen = ({}) => {
             navigation.goBack();
           },
         }}
+        right={{
+          name: "trash",
+          color: getColor("red-500"),
+          backgroundColor: getColor("gray-50"),
+          onPress: () => {
+            Alert.alert(
+              "Delete Contact?",
+              "This contact will be permanently delete from your contacts list",
+              []
+            );
+          },
+        }}
       />
-      <ScrollView style={tailwind("p-3")}>
+      <ScrollView style={tailwind("p-3")} showsVerticalScrollIndicator={false}>
         <View style={tailwind("bg-white p-5")}>
           <Avatar
             style={tailwind("self-center w-28 h-28")}
@@ -42,29 +49,54 @@ const ContactDetailsScreen = ({}) => {
             </Text>
           </View>
         </View>
-        <View style={tailwind("bg-white p-5 mt-3 flex-row justify-evenly")}>
-          <TouchableOpacity>
-            <RoundedIcon
-              size={45}
-              iconName="phone"
-              color={getColor("green-500")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <RoundedIcon
-              size={45}
-              iconName="message-square"
-              color={getColor("blue-500")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <RoundedIcon
-              size={45}
-              iconName="video"
-              color={getColor("green-500")}
-            />
-          </TouchableOpacity>
+        <View
+          style={tailwind(
+            "bg-white p-5 mt-3 flex-row justify-between items-center"
+          )}
+        >
+          <View style={tailwind("")}>
+            <View style={tailwind("flex-row items-center")}>
+              <CountryPicker
+                theme={tailwind("font-sfp-semibold text-base")}
+                containerButtonStyle={tailwind("mr-2")}
+                countryCode="BD"
+                withCallingCode
+                withCallingCodeButton
+              />
+
+              <Text style={tailwind("font-sfp-semibold text-base")}>
+                1315873250
+              </Text>
+            </View>
+          </View>
+          <View style={tailwind("flex-row items-center")}>
+            <TouchableOpacity style={tailwind("mr-5")}>
+              <RoundedIcon
+                size={48}
+                iconRatio={0.45}
+                iconName="phone"
+                backgroundColor={getColor("gray-100")}
+                color={getColor("green-500")}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <RoundedIcon
+                size={48}
+                iconRatio={0.45}
+                iconName="message-square"
+                backgroundColor={getColor("gray-100")}
+                color={getColor("blue-500")}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
+        <Button
+          label="Edit contact"
+          color={"text-white"}
+          background={"bg-gray-900"}
+          hover={"bg-gray-800"}
+          style={tailwind("mt-5")}
+        />
       </ScrollView>
     </View>
   );
