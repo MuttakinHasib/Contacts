@@ -5,7 +5,7 @@ Istall Expo Cli
 ```
 npm i -g expo-cli
 ```
-
+next ->
 ```
 npm i or yarn
 ```
