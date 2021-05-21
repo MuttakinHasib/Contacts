@@ -4,7 +4,10 @@ import { tailwind } from "../../lib/tailwind";
 
 const Container = ({ children, className, style }) => {
   return (
-    <ScrollView style={[tailwind(`p-5 ${className ? className : ""}`), style]}>
+    <ScrollView
+      style={[tailwind(`p-5 ${className ? className : ""}`), style]}
+      showsVerticalScrollIndicator={false}
+    >
       {children}
     </ScrollView>
   );

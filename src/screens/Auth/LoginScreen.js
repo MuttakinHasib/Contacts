@@ -22,7 +22,7 @@ const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
       <View
         style={[
           tailwind("bg-gray-900"),

@@ -19,7 +19,7 @@ const { height: wHeight } = Dimensions.get("window");
 
 const RegisterScreen = ({ navigation }) => {
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
       <View
         style={[
           tailwind("bg-gray-900"),
@@ -52,6 +52,7 @@ const RegisterScreen = ({ navigation }) => {
           style={tailwind(
             "bg-gray-100 flex-1 pb-10 overflow-hidden rounded-tl-default"
           )}
+          showsVerticalScrollIndicator={false}
         >
           <View style={[tailwind("justify-between")]}>
             <View style={tailwind("p-5")}>

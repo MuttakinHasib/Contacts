@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Avatar, Icon } from "@ui-kitten/components";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import * as ImagePicker from "expo-image-picker";
 import {
   View,
   Text,
   Dimensions,
   TouchableOpacity,
   ScrollView,
-  TouchableNativeFeedback,
 } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import * as ImagePicker from "expo-image-picker";
 
 import { getColor, tailwind } from "../../../lib/tailwind";
 import { AddToFavorites, AppInput, Button, Header } from "../../components";

@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
 import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { getColor, tailwind } from "../../../lib/tailwind";
-import { Button, Header, RoundedIcon } from "../../components";
+import { AddToFavorites, Button, Header, RoundedIcon } from "../../components";
 import { Avatar } from "@ui-kitten/components";
 import CountryPicker from "react-native-country-picker-modal";
 
-const ContactDetailsScreen = ({}) => {
+const ContactDetailsScreen = () => {
   const navigation = useNavigation();
+  const [favorite, setFavorite] = useState(false);
+
   return (
     <View style={tailwind("flex-1")}>
       <Header
@@ -90,6 +92,11 @@ const ContactDetailsScreen = ({}) => {
             </TouchableOpacity>
           </View>
         </View>
+        <AddToFavorites
+          checked={favorite}
+          onChange={isChecked => setFavorite(isChecked)}
+          onPress={() => setFavorite(prev => !prev)}
+        />
         <Button
           label="Edit contact"
           color={"text-white"}
