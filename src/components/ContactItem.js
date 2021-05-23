@@ -1,4 +1,3 @@
-
 import { Avatar, Icon, ListItem } from "@ui-kitten/components";
 import React from "react";
 import { Text } from "react-native";
@@ -14,7 +13,7 @@ const ContactItem = ({ item, navigation }) => {
       )}
       description={() => (
         <Text style={tailwind("font-sfp-regular text-gray-600")}>
-          {item.phone}
+          {item.phone[0]}
         </Text>
       )}
       accessoryLeft={() => (

@@ -15,8 +15,9 @@ import {
 import { useFonts } from "expo-font";
 
 import AppNavContainer from "./src/navigations";
-import { store } from "./src/redux/store";
+import { store, persist } from "./src/redux/store";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { PersistGate } from "redux-persist/integration/react";
 
 const App = () => {
   const isDarkMode = useColorScheme();
@@ -34,7 +35,7 @@ const App = () => {
 
   return (
     <Provider {...{ store }}>
-    {/* <PersistGate */}
+      {/* <PersistGate persistor={persist} loading={null}> */}
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva[isDarkMode]}>
         <SafeAreaProvider style={styles.container}>
@@ -42,6 +43,7 @@ const App = () => {
           {/* <StatusBar style="auto" /> */}
         </SafeAreaProvider>
       </ApplicationProvider>
+      {/* </PersistGate> */}
     </Provider>
   );
 };

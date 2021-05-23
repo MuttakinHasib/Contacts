@@ -4,15 +4,11 @@ import { View, FlatList } from "react-native";
 
 import { getColor, tailwind } from "../../../lib/tailwind";
 import { AddButton, ContactItem, Header } from "../../components";
+import { useSelector } from "react-redux";
 
-const contacts = [...Array(30).keys()].map((_, i) => ({
-  id: faker.datatype.uuid(),
-  name: faker.name.firstName(),
-  phone: faker.phone.phoneNumber(),
-  avatar: faker.image.avatar(),
-}));
 
 const ContactsScreen = ({ navigation }) => {
+  const { loading, contacts, error } = useSelector(state => state.contactList);
   return (
     <View style={tailwind("flex-1")}>
       <Header
