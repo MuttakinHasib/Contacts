@@ -34,6 +34,7 @@ const App = () => {
 
   return (
     <Provider {...{ store }}>
+    {/* <PersistGate */}
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva[isDarkMode]}>
         <SafeAreaProvider style={styles.container}>

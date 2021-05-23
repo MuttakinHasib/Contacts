@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
-import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Alert, Linking } from "react-native";
 import { getColor, tailwind } from "../../../lib/tailwind";
 import { AddToFavorites, Button, Header, RoundedIcon } from "../../components";
 import { Avatar } from "@ui-kitten/components";
@@ -72,7 +72,7 @@ const ContactDetailsScreen = () => {
             </View>
           </View>
           <View style={tailwind("flex-row items-center")}>
-            <TouchableOpacity style={tailwind("mr-5")}>
+            <TouchableOpacity style={tailwind("mr-5")} onPress={() => Linking.openURL('tel:01315873250')}>
               <RoundedIcon
                 size={48}
                 iconRatio={0.45}
