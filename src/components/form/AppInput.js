@@ -6,7 +6,7 @@ import { tailwind } from "../../../lib/tailwind";
 const AppInput = ({ label, type, placeholder, onChangeText, phone }) => {
   const [countryCode, setCountryCode] = useState("BD");
   const [callingCode, setCallingCode] = useState("");
-
+console.log(callingCode);
   const setKeyboardType = type => {
     if (type === "number") {
       return "numeric";

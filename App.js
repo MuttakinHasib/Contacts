@@ -35,15 +35,15 @@ const App = () => {
 
   return (
     <Provider {...{ store }}>
-      {/* <PersistGate persistor={persist} loading={null}> */}
-      <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva[isDarkMode]}>
-        <SafeAreaProvider style={styles.container}>
-          <AppNavContainer />
-          {/* <StatusBar style="auto" /> */}
-        </SafeAreaProvider>
-      </ApplicationProvider>
-      {/* </PersistGate> */}
+      <PersistGate persistor={persist} loading={null}>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider {...eva} theme={eva[isDarkMode]}>
+          <SafeAreaProvider style={styles.container}>
+            <AppNavContainer />
+            {/* <StatusBar style="auto" /> */}
+          </SafeAreaProvider>
+        </ApplicationProvider>
+      </PersistGate>
     </Provider>
   );
 };

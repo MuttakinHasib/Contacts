@@ -5,7 +5,7 @@ import AuthNavigator from "./AuthNavigator";
 import { useSelector } from "react-redux";
 
 const AppNavContainer = () => {
-  const { user } = useSelector(state => state.userLogin);
+  const { user } = useSelector(state => state.auth);
   return (
     <NavigationContainer>
       {user ? <DrawerNavigator /> : <AuthNavigator />}

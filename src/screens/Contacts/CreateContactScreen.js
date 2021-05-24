@@ -14,7 +14,7 @@ import {
 import { getColor, tailwind } from "../../../lib/tailwind";
 import { AddToFavorites, AppInput, Button, Header } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
-import { createContact } from "../../redux/actions/contactActions";
+import { createContact } from "../../redux/slices/contactSlice";
 
 const { height } = Dimensions.get("screen");
 
@@ -25,7 +25,8 @@ const CreateContactScreen = ({ navigation }) => {
   const [numberField, setNumberField] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState([]);
+  const [phoneField, setPhoneField] = useState("");
 
   const [avatar, setAvatar] = useState(
     "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png"
@@ -52,6 +53,7 @@ const CreateContactScreen = ({ navigation }) => {
     dispatch(
       createContact({ id: faker.datatype.uuid(), avatar, name, email, phone })
     );
+    navigation.navigate("Contacts");
   };
 
   return (

@@ -6,9 +6,9 @@ import { getColor, tailwind } from "../../../lib/tailwind";
 import { AddButton, ContactItem, Header } from "../../components";
 import { useSelector } from "react-redux";
 
-
 const ContactsScreen = ({ navigation }) => {
-  const { loading, contacts, error } = useSelector(state => state.contactList);
+  const { contacts } = useSelector(state => state.contactList);
+
   return (
     <View style={tailwind("flex-1")}>
       <Header

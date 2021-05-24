@@ -4,7 +4,7 @@ import React from "react";
 import { View, Text, Dimensions, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import { getColor, tailwind } from "../../../lib/tailwind";
-import { logout } from "../../redux/actions/authActions";
+import { logout } from "../../redux/slices/authSlice";
 import DrawerItem from "./DrawerItem";
 
 const { height: wHeight } = Dimensions.get("window");

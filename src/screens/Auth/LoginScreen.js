@@ -14,7 +14,7 @@ import { tailwind } from "../../../lib/tailwind";
 import { AppInput, Button } from "../../components";
 import { statusbarHeight } from "../../utils/statusbar";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/actions/authActions";
+import { login } from "../../redux/slices/authSlice";
 
 const { height: wHeight } = Dimensions.get("window");
 
