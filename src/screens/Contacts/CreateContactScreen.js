@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import faker from "faker";
+import { produce } from "immer";
+import { generate } from "shortid";
 import { Avatar, Icon } from "@ui-kitten/components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as ImagePicker from "expo-image-picker";
@@ -10,10 +12,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getColor, tailwind } from "../../../lib/tailwind";
 import { AddToFavorites, AppInput, Button, Header } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
 import { createContact } from "../../redux/slices/contactSlice";
 
 const { height } = Dimensions.get("screen");
@@ -22,17 +24,19 @@ const CreateContactScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contactList);
   const [favorite, setFavorite] = useState(false);
-  const [numberField, setNumberField] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState([]);
-  const [phoneField, setPhoneField] = useState("");
+  // const [countryCode, setCountryCode] = useState("BD");
+  // const [callingCode, setCallingCode] = useState("880");
+  const [phoneNumbers, setPhoneNumbers] = useState([
+    { id: generate(), phone: "", callingCode: "880", countryCode: "BD" },
+  ]);
 
   const [avatar, setAvatar] = useState(
     "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png"
   );
 
-  console.log(contacts);
+  console.log(phoneNumbers);
 
   const handlePickerAvatar = async () => {
     await ImagePicker.getCameraPermissionsAsync();
@@ -51,7 +55,13 @@ const CreateContactScreen = ({ navigation }) => {
   const submitHandler = () => {
     // console.log({ id: faker.datatype.uuid(), avatar, name, email, phone });
     dispatch(
-      createContact({ id: faker.datatype.uuid(), avatar, name, email, phone })
+      createContact({
+        id: faker.datatype.uuid(),
+        avatar,
+        name,
+        email,
+        phoneNumbers,
+      })
     );
     navigation.navigate("Contacts");
   };
@@ -93,21 +103,47 @@ const CreateContactScreen = ({ navigation }) => {
               placeholder="example@email.com"
               onChangeText={text => setEmail(text)}
             />
-            {[...Array(numberField).keys()].map((_, i) => (
+            {phoneNumbers.map((p, i) => (
               <AppInput
-                key={i}
+                key={p.id}
                 phone
                 type="number"
                 label="Phone Number"
                 placeholder="1XXX - XXXXX"
-                onChangeText={text => setPhone(text)}
+                countryCode={phoneNumbers[i].countryCode}
+                onChangeText={text => {
+                  const phone = text;
+                  setPhoneNumbers(currentNumbers =>
+                    produce(currentNumbers, value => {
+                      value[i].phone = phone;
+                    })
+                  );
+                }}
+                onSelect={country => {
+                  setPhoneNumbers(currentNumbers =>
+                    produce(currentNumbers, value => {
+                      value[i].callingCode = country.callingCode[0];
+                      value[i].countryCode = country.cca2;
+                    })
+                  );
+                }}
               />
             ))}
             <TouchableOpacity
               style={tailwind(
                 "bg-white mt-5 px-3 py-5 flex-row justify-between items-center rounded-lg"
               )}
-              onPress={() => setNumberField(prev => prev + 1)}
+              onPress={() =>
+                setPhoneNumbers(currentNumbers => [
+                  ...currentNumbers,
+                  {
+                    id: generate(),
+                    phone: "",
+                    callingCode: "880",
+                    countryCode: "BD",
+                  },
+                ])
+              }
             >
               <Text style={tailwind("font-sfp-semibold text-base")}>
                 Add another phone

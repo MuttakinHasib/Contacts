@@ -13,7 +13,7 @@ const ContactItem = ({ item, navigation }) => {
       )}
       description={() => (
         <Text style={tailwind("font-sfp-regular text-gray-600")}>
-          {item.phone[0]}
+          {`+${item?.phoneNumbers[0].callingCode} ${item?.phoneNumbers[0].phone}`}
         </Text>
       )}
       accessoryLeft={() => (

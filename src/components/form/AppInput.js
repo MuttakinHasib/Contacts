@@ -3,10 +3,15 @@ import { View, Text, TextInput } from "react-native";
 import CountryPicker, { FlagButton } from "react-native-country-picker-modal";
 import { tailwind } from "../../../lib/tailwind";
 
-const AppInput = ({ label, type, placeholder, onChangeText, phone }) => {
-  const [countryCode, setCountryCode] = useState("BD");
-  const [callingCode, setCallingCode] = useState("");
-console.log(callingCode);
+const AppInput = ({
+  label,
+  type,
+  placeholder,
+  onChangeText,
+  phone,
+  onSelect,
+  countryCode = "BD",
+}) => {
   const setKeyboardType = type => {
     if (type === "number") {
       return "numeric";
@@ -31,11 +36,7 @@ console.log(callingCode);
             withCallingCodeButton
             withEmoji
             containerButtonStyle={tailwind("mr-2")}
-            {...{ countryCode }}
-            onSelect={item => {
-              setCountryCode(item.cca2);
-              setCallingCode(item.countryCode);
-            }}
+            {...{ countryCode, onSelect }}
           />
         )}
         <TextInput
