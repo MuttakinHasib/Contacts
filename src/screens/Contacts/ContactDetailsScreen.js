@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
-import { View, Text, ScrollView, TouchableOpacity, Alert, Linking } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+  Linking,
+} from "react-native";
 import { getColor, tailwind } from "../../../lib/tailwind";
 import { AddToFavorites, Button, Header, RoundedIcon } from "../../components";
 import { Avatar } from "@ui-kitten/components";
 import CountryPicker from "react-native-country-picker-modal";
+import { useSelector } from "react-redux";
 
-const ContactDetailsScreen = () => {
+const ContactDetailsScreen = ({ route }) => {
+  const { id } = route.params;
   const navigation = useNavigation();
-  const [favorite, setFavorite] = useState(false);
+  const { contacts } = useSelector(state => state.contactList);
 
+  const [contact] = contacts.filter(item => item.id === id);
+
+  const [favorite, setFavorite] = useState(contact.isFavorite);
   return (
     <View style={tailwind("flex-1")}>
       <Header
@@ -39,59 +51,71 @@ const ContactDetailsScreen = () => {
           <Avatar
             style={tailwind("self-center w-28 h-28")}
             source={{
-              uri: "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png",
+              uri: contact.avatar,
             }}
           />
           <View style={tailwind("items-center pt-3")}>
             <Text style={tailwind("font-sfp-semibold text-xl text-gray-700")}>
-              Hasib Molla
+              {contact.name}
             </Text>
             <Text style={tailwind("font-sfp-regular text-gray-500")}>
-              hasibmolla28@gmail.com
+              {contact.email}
             </Text>
           </View>
         </View>
-        <View
-          style={tailwind(
-            "bg-white p-5 mt-3 flex-row justify-between items-center"
-          )}
-        >
-          <View style={tailwind("")}>
-            <View style={tailwind("flex-row items-center")}>
-              <CountryPicker
-                theme={tailwind("font-sfp-semibold text-base")}
-                containerButtonStyle={tailwind("mr-2")}
-                countryCode="BD"
-                withCallingCode
-                withCallingCodeButton
-              />
+        {contact.phoneNumbers.map(item => (
+          <View
+            key={item.id}
+            style={tailwind(
+              "bg-white p-5 mt-3 flex-row justify-between items-center"
+            )}
+          >
+            <View style={tailwind("")}>
+              <View style={tailwind("flex-row items-center")}>
+                <CountryPicker
+                  theme={tailwind("font-sfp-semibold text-base")}
+                  containerButtonStyle={tailwind("mr-2")}
+                  countryCode="BD"
+                  withCallingCode
+                  withCallingCodeButton
+                />
 
-              <Text style={tailwind("font-sfp-semibold text-base")}>
-                1315873250
-              </Text>
+                <Text style={tailwind("font-sfp-semibold text-base")}>
+                  {item.phone}
+                </Text>
+              </View>
+            </View>
+            <View style={tailwind("flex-row items-center")}>
+              <TouchableOpacity
+                style={tailwind("mr-5")}
+                onPress={() =>
+                  Linking.openURL(`tel:${item.callingCode}${item.phone}`)
+                }
+              >
+                <RoundedIcon
+                  size={48}
+                  iconRatio={0.45}
+                  iconName="phone"
+                  backgroundColor={getColor("gray-100")}
+                  color={getColor("green-500")}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL(`sms:${item.callingCode}${item.phone}`)
+                }
+              >
+                <RoundedIcon
+                  size={48}
+                  iconRatio={0.45}
+                  iconName="message-square"
+                  backgroundColor={getColor("gray-100")}
+                  color={getColor("blue-500")}
+                />
+              </TouchableOpacity>
             </View>
           </View>
-          <View style={tailwind("flex-row items-center")}>
-            <TouchableOpacity style={tailwind("mr-5")} onPress={() => Linking.openURL('tel:01315873250')}>
-              <RoundedIcon
-                size={48}
-                iconRatio={0.45}
-                iconName="phone"
-                backgroundColor={getColor("gray-100")}
-                color={getColor("green-500")}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <RoundedIcon
-                size={48}
-                iconRatio={0.45}
-                iconName="message-square"
-                backgroundColor={getColor("gray-100")}
-                color={getColor("blue-500")}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+        ))}
         <AddToFavorites
           checked={favorite}
           onChange={isChecked => setFavorite(isChecked)}

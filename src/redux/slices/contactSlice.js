@@ -12,9 +12,13 @@ const contactReducer = createSlice({
       loading: false,
       contacts: [...state.contacts, action.payload],
     }),
+    resetContact: (state,action) => ({
+      loading: false,
+      contacts: []
+    })
   },
 });
 
-export const { createContact } = contactReducer.actions;
+export const { createContact,resetContact } = contactReducer.actions;
 
 export default contactReducer.reducer;

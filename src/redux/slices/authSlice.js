@@ -1,5 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice } from "@reduxjs/toolkit";
+import { resetContact } from "./contactSlice";
+
+const resetStorage = async () => await AsyncStorage.removeItem("persist:root");
 
 const authReducer = createSlice({
   name: "auth",
@@ -15,9 +18,10 @@ const authReducer = createSlice({
     }),
     register: (state, action) => {},
     logout: (state, action) => {
-      AsyncStorage.removeItem("persist:root");
+      console.log(action.type);
+      resetContact();
+      resetStorage();
       return {
-        ...state,
         loading: false,
         user: null,
       };

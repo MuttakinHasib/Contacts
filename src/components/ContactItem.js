@@ -6,7 +6,7 @@ import { getColor, tailwind } from "../../lib/tailwind";
 const ContactItem = ({ item, navigation }) => {
   return (
     <ListItem
-      onPress={() => navigation.navigate("Contact Details")}
+      onPress={() => navigation.navigate("Contact Details", { id: item.id })}
       style={tailwind("px-6 border-t border-gray-100")}
       title={() => (
         <Text style={tailwind("font-sfp-semibold text-base")}>{item.name}</Text>

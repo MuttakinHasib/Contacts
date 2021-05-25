@@ -1,6 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import logger from "redux-logger";
 import {
   persistStore,
   persistReducer,
@@ -17,9 +17,21 @@ import rootReducers from "./rootReducers";
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
+  blacklist: ["navigation"],
 };
 
-const reducer = persistReducer(persistConfig, rootReducers);
+const rootReducer = (state, action) => {
+  if (action.type === "auth/logout") {
+    // for all keys defined in your persistConfig(s)
+    Object.keys(state).forEach(key => {
+      AsyncStorage.removeItem(`persist:${key}`);
+    });
+    state = undefined;
+  }
+  return rootReducers(state, action);
+};
+
+const reducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer,
@@ -30,6 +42,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    logger,
   ],
 });
 

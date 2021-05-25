@@ -61,6 +61,7 @@ const CreateContactScreen = ({ navigation }) => {
         name,
         email,
         phoneNumbers,
+        isFavorite: favorite,
       })
     );
     navigation.navigate("Contacts");
