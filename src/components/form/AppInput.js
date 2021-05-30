@@ -11,6 +11,7 @@ const AppInput = ({
   phone,
   onSelect,
   countryCode = "BD",
+  error,
 }) => {
   const setKeyboardType = type => {
     if (type === "number") {
@@ -23,7 +24,13 @@ const AppInput = ({
   };
 
   return (
-    <View style={tailwind("bg-white mt-5 rounded-lg p-3")}>
+    <View
+      style={tailwind(
+        `bg-white mt-5 rounded-lg p-3 border ${
+          !error ? "border-white" : "border-red-400"
+        }`
+      )}
+    >
       <Text style={tailwind("mb-1 font-sfp-semibold")}>{label}</Text>
       <View style={tailwind("flex-row items-center")}>
         {phone && (

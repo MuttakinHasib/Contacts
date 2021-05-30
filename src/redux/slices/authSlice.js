@@ -18,7 +18,6 @@ const authReducer = createSlice({
     }),
     register: (state, action) => {},
     logout: (state, action) => {
-      console.log(action.type);
       resetContact();
       resetStorage();
       return {

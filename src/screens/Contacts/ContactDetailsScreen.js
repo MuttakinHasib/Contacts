@@ -12,16 +12,14 @@ import { getColor, tailwind } from "../../../lib/tailwind";
 import { AddToFavorites, Button, Header, RoundedIcon } from "../../components";
 import { Avatar } from "@ui-kitten/components";
 import CountryPicker from "react-native-country-picker-modal";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/slices/contactSlice";
 
-const ContactDetailsScreen = ({ route }) => {
-  const { id } = route.params;
-  const navigation = useNavigation();
-  const { contacts } = useSelector(state => state.contactList);
-
-  const [contact] = contacts.filter(item => item.id === id);
-
+const ContactDetailsScreen = ({ route, navigation }) => {
+  const { contact } = route.params;
+  const dispatch = useDispatch();
   const [favorite, setFavorite] = useState(contact.isFavorite);
+
   return (
     <View style={tailwind("flex-1")}>
       <Header
@@ -41,7 +39,21 @@ const ContactDetailsScreen = ({ route }) => {
             Alert.alert(
               "Delete Contact?",
               "This contact will be permanently delete from your contacts list",
-              []
+              [
+                {
+                  text: "Cancel",
+                  onPress: () => console.log("Cancel Pressed"),
+                  style: "cancel",
+                },
+                {
+                  text: "Ok",
+                  onPress: () => {
+                    dispatch(deleteContact({ id: contact.id }));
+                    navigation.navigate("Contacts");
+                  },
+                },
+              ],
+              { cancelable: false }
             );
           },
         }}

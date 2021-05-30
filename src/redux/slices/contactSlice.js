@@ -7,18 +7,22 @@ const contactReducer = createSlice({
     contacts: [],
   },
   reducers: {
-    createContact: (state, action) => ({
-      ...state,
+    createContact: (state, { payload }) => {
+      state.contacts.push(payload);
+      state.loading = false;
+    },
+    deleteContact: ({ contacts }, { payload }) => {
+      const index = contacts.find(contact => contact.id === payload.id);
+      contacts.splice(index, 1);
+    },
+    resetContact: (state, action) => ({
       loading: false,
-      contacts: [...state.contacts, action.payload],
+      contacts: [],
     }),
-    resetContact: (state,action) => ({
-      loading: false,
-      contacts: []
-    })
   },
 });
 
-export const { createContact,resetContact } = contactReducer.actions;
+export const { createContact, deleteContact, resetContact } =
+  contactReducer.actions;
 
 export default contactReducer.reducer;

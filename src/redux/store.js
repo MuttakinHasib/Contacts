@@ -37,7 +37,6 @@ export const store = configureStore({
   reducer,
   middleware: [
     ...getDefaultMiddleware({
-      thunk: true,
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },

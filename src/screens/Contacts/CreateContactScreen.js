@@ -22,12 +22,10 @@ const { height } = Dimensions.get("screen");
 
 const CreateContactScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contactList);
+  const [error, setError] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  // const [countryCode, setCountryCode] = useState("BD");
-  // const [callingCode, setCallingCode] = useState("880");
   const [phoneNumbers, setPhoneNumbers] = useState([
     { id: generate(), phone: "", callingCode: "880", countryCode: "BD" },
   ]);
@@ -35,8 +33,6 @@ const CreateContactScreen = ({ navigation }) => {
   const [avatar, setAvatar] = useState(
     "https://res.cloudinary.com/muttakinhasib/image/upload/v1621273993/avatar/user_dmy5bs.png"
   );
-
-  console.log(phoneNumbers);
 
   const handlePickerAvatar = async () => {
     await ImagePicker.getCameraPermissionsAsync();
@@ -54,6 +50,11 @@ const CreateContactScreen = ({ navigation }) => {
 
   const submitHandler = () => {
     // console.log({ id: faker.datatype.uuid(), avatar, name, email, phone });
+    if (!name.length || !email.length || !phoneNumbers.length) {
+      setError(true);
+      return;
+    }
+
     dispatch(
       createContact({
         id: faker.datatype.uuid(),
@@ -64,6 +65,7 @@ const CreateContactScreen = ({ navigation }) => {
         isFavorite: favorite,
       })
     );
+    setError(false);
     navigation.navigate("Contacts");
   };
 
@@ -94,11 +96,13 @@ const CreateContactScreen = ({ navigation }) => {
           </TouchableOpacity>
           <View style={tailwind("pb-10")}>
             <AppInput
+              {...{ error }}
               label="Name"
               placeholder="Hasib Molla"
               onChangeText={text => setName(text)}
             />
             <AppInput
+              {...{ error }}
               type="email"
               label="Email Address"
               placeholder="example@email.com"
@@ -106,6 +110,7 @@ const CreateContactScreen = ({ navigation }) => {
             />
             {phoneNumbers.map((p, i) => (
               <AppInput
+                {...{ error }}
                 key={p.id}
                 phone
                 type="number"
